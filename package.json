@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.14.2",
+    "react-speech-recognition": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0"
+  }
+}

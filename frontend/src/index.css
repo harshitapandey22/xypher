@@ -1,0 +1,172 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* ========================================================
+   1. Theme Variables
+   --------------------------------------------------------
+   Define default (light) on :root, then override for
+   dark and colour‑blind under [data-theme].
+=========================================================*/
+
+/* Light Mode (default) */
+:root {
+  --bg:         #ffffff;
+  --fg:         #1f2937;
+  --primary:    #1d4ed8;
+  --secondary:  #6b5ce5;
+  --accent:     #1d4ed8;
+  --card-bg:    #f3f4f6;      /* new: slightly darker than white */
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg:         #000717;
+  --fg:         #f1f5f9;
+  --primary:    #1d4ed8;
+  --secondary:  #6b5ce5;
+  --accent:     #1d4ed8;
+  --card-bg:    #030e27;      /* new: slightly lighter than page bg */
+}
+
+/* Colour‑Blind Mode (Okabe–Ito) */
+[data-theme="colourblind"] {
+  --bg:         #000000;
+  --fg:         #FFFFFF;
+  --primary:    #56B4E9;
+  --secondary:  #E69F00;
+  --accent:     #CC79A7;
+  --card-bg:    #202020;      /* new: distinguishable from pure black */
+}
+
+/* ========================================================
+   2. Apply Variables Site‑Wide
+---------------------------------------------------------*/
+html, body {
+  background-color: var(--bg);
+  color:            var(--fg);
+}
+
+a {
+  color: var(--primary);
+}
+
+/* Override common Tailwind utility classes */
+.text-white        { color: var(--fg) !important; }
+.text-gray-600,
+.text-gray-900     { color: var(--fg) !important; }
+.bg-white          { background-color: var(--bg) !important; }
+.bg-gray-900       { background-color: var(--bg) !important; }
+
+/* ========================================================
+   3. Custom Scrollbars & Hiding Scrollbars
+---------------------------------------------------------*/
+/* WebKit */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px; height: 6px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: #2a2b33;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+  border-radius: 8px;
+  border: 1px solid #2a2b33;
+}
+
+/* Firefox */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) #2a2b33;
+}
+
+/* Hide scrollbar but keep scrolling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+html, body, #root {
+  overflow: auto;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================================
+   4. Google Translate Widget Overrides
+---------------------------------------------------------*/
+.goog-te-banner-frame.skiptranslate,
+body > .skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+#google_translate_element {
+  display: none;
+}
+
+/* ========================================================
+   5. Colour‑Blind Mode Specific Overrides
+---------------------------------------------------------*/
+[data-theme="colourblind"] .bg-gradient-to-r,
+[data-theme="colourblind"] .from-purple-500,
+[data-theme="colourblind"] .to-indigo-500 {
+  background-image: none !important;
+  background-color: var(--bg) !important;
+  color:            var(--accent) !important;
+  border:           2px solid var(--accent) !important;
+}
+
+[data-theme="colourblind"] .icon-gradient {
+  background:       none    !important;
+  background-color: var(--bg) !important;
+  border:           2px solid var(--accent) !important;
+  border-radius:    0.5rem   !important;
+}
+
+[data-theme="colourblind"] .quote-box {
+  background-color: var(--bg) !important;
+  color:            var(--fg) !important;
+  border-color:     var(--accent) !important;
+}
+
+/* ========================================================
+   6. Forecast / Plotly Modebar Overrides
+---------------------------------------------------------*/
+.forecast-plot-wrapper .modebar {
+  position: absolute !important;
+  top: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background: rgba(17,24,39,0.5);
+  border-radius: 8px;
+  padding: 4px 6px;
+  z-index: 10;
+}
+.forecast-plot-wrapper .modebar-group {
+  display: flex !important;
+  gap: 8px;
+}
+.forecast-plot-wrapper .modebar-btn {
+  pointer-events: auto;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.forecast-plot-wrapper .modebar-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
