@@ -131,12 +131,10 @@ You can explore the full site without signing up:
 
 ---
 
-## 🧑‍💻 Team Nemolly
+## 🧑‍💻 Team Jalebi Fafda
 
-- **Hemank** — AI/ML Developer [@artyish](https://github.com/artyish)  
-- **Dolly** — Frontend Developer [@idkdolly](https://github.com/idkdolly)  
-- **Neeraj** — Backend Developer [@neeraj704](https://github.com/neeraj704)  
-
+- **Neeraj** — AI/ML + Backend Developer [@artyish](https://github.com/artyish)  
+- **Harshita** — Frontend Developer [@idkdolly](https://github.com/idkdolly)  
 ---
 
 ## ⚡ Special Thanks
