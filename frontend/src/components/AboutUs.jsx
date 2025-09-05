@@ -79,7 +79,7 @@ export default function AboutUs() {
                 "Our vision is to make financial planning as simple as checking
                 your email yet as powerful as having a personal financial advisor."
               </p>
-              <p className="font-bold mt-2">– The People Behind Code2Roast</p>
+              <p className="font-bold mt-2">– The People Behind CapitaClarity</p>
             </div>
           </Motion.div>
         </div>

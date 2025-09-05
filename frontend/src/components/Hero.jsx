@@ -155,7 +155,7 @@ export default function   HeroSection() {
                   <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                 </div>
                 <div className="text-xs sm:text-sm text-gray-500 hidden sm:block">
-                  Code2Roast.com/dashboard
+                  CapitaClarity.com/dashboard
                 </div>
               </div>
 

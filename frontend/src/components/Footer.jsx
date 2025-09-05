@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Brand + Mission */}
         <div>
-          <h2 className="text-2xl font-bold text-white">Code2Roast</h2>
+          <h2 className="text-2xl font-bold text-white">CapitaClarity</h2>
           <p className="mt-2 text-sm text-gray-400">
             Because Sometimes Your Wallet Needs the Truth.
           </p>
@@ -59,7 +59,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="w-full mt-10 pt-5 border-t border-zinc-700 flex flex-col md:flex-row justify-between items-center">
-        © {new Date().getFullYear()} Code2Roast. All rights reserved.
+        © {new Date().getFullYear()} CapitaClarity. All rights reserved.
         <p className=" flex items-center justify-center gap-2 mt-2">
           Made with <FaHeart size={20} className="text-pink-600" /> by Team
           Nemolly

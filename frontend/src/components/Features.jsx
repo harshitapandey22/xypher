@@ -41,7 +41,7 @@ export default function FeatureSection() {
       icon: Smartphone,
       title: "Mobile Responsive",
       description:
-        "Use Code2Roast anytime, anywhere — it’s optimized for all devices.",
+        "Use CapitaClarity anytime, anywhere — it’s optimized for all devices.",
       gradient: "from-red-600 to-red-400",
     },
     {

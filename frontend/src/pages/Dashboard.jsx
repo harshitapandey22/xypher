@@ -129,7 +129,7 @@ export default function Dashboard() {
                         <div className="bg-[#FF4C4C] h-2 rounded" style={{ width: `${pct}%` }} />
                       </div>
                       <div className="max-w-64 mt-8">
-                        <p className="text-sm text-gray-300">Every rupee saved today builds tomorrow’s success—stay within your daily limit with Code2Roast.</p>
+                        <p className="text-sm text-gray-300">Every rupee saved today builds tomorrow’s success—stay within your daily limit with CapitaClarity.</p>
                       </div>
                     </div>
                   </div>

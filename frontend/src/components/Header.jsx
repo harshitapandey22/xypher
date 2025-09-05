@@ -29,7 +29,7 @@ export default function Header() {
             <IoMdTrendingUp className="w-6 h-6 text-white" />
           </div>
           <span className="text-2xl font-bold bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent">
-            Code2Roast
+            CapitaClarity
           </span>
         </Motion.div>
 
