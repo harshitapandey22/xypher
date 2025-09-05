@@ -16,6 +16,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Walkthrough from "../components/Walkthrough";
 import { useDashboardTour } from "../context/TourContext";
+import FraudulentTransactionModal from "../components/FraudulentTransactionModal";
 
 export default function Dashboard() {
   const { user, refreshUser, accessToken } = useAuthStore();
@@ -29,6 +30,16 @@ export default function Dashboard() {
   const [forecastData, setForecastData] = useState(null);
   const hasMounted = useRef(false);
   const { step } = useDashboardTour();
+  const [showFraudModal, setShowFraudModal] = useState(false);
+
+  const handleTransactionSuccess = (isFraudulent) => {
+    setTxnFlag((f) => f + 1);
+    setGoalFlag((f) => f + 1);
+    if (isFraudulent) {
+      setShowFraudModal(true);
+    }
+  };
+
 
   useEffect(() => {
     const init = async () => {
@@ -184,10 +195,7 @@ export default function Dashboard() {
       <CreateTransactionModal
         isOpen={showTxnModal}
         onRequestClose={() => setShowTxnModal(false)}
-        onSuccess={() => {
-          setTxnFlag((f) => f + 1);
-          setGoalFlag((f) => f + 1);
-        }}
+        onSuccess={handleTransactionSuccess}
         type={txnType}
       />
       <AddGoalModal
@@ -195,6 +203,7 @@ export default function Dashboard() {
         onRequestClose={() => setShowGoalModal(false)}
         onSuccess={() => setGoalFlag((f) => f + 1)}
       />
+      <FraudulentTransactionModal isOpen={showFraudModal} onRequestClose={() => setShowFraudModal(false)} />
     </div>
   );
 }

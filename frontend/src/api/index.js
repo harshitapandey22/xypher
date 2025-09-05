@@ -5,3 +5,4 @@ export * from "./goal";
 export * from "./ml";
 export * from "./transaction";
 export * from "./user";
+export * from "./fraud";

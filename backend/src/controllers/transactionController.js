@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { ML_API_URL } = process.env;
+const { ML_API_URL, FRAUD_DETECTION_API_URL } = process.env;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { z } = require('zod');
@@ -9,14 +9,14 @@ const txnSchema = z.object({
   description: z.string().optional(),
   categoryName: z.string(),
   type: z.enum(["income","expense"]),
-  date: z.string().optional(),            
-  initialBalance: z.number().optional()  
+  date: z.string().optional(),
+  initialBalance: z.number().optional()
 });
 
 exports.createTransaction = async (req,res,next)=>{
   try {
     const { amount, description, categoryName, type, date } = txnSchema.parse(req.body);
-    
+
     let cat = await prisma.category.findFirst({where:{ name: categoryName, userId: req.user.id }});
     if(!cat) cat = await prisma.category.create({data:{ name: categoryName, userId: req.user.id }});
 
@@ -44,9 +44,31 @@ exports.createTransaction = async (req,res,next)=>{
     const allTxns = await prisma.transaction.findMany({
       where: { userId: req.user.id },
       orderBy: { date: 'asc' },
-      select: { amount: true, type: true, date: true }
+      select: { amount: true, type: true, date: true, description: true }
     });
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+
+    // Fraud Detection Call
+    let isFraudulent = 0;
+    if (FRAUD_DETECTION_API_URL) {
+      try {
+        console.log("--> Calling Fraud Detection API..."); // Logging the attempt
+        const fraudDetectionResponse = await axios.post(`${FRAUD_DETECTION_API_URL}/detect_fraud`, {
+            transactions: allTxns.map(t => ({
+                amount: t.amount,
+                description: t.description || '',
+                date: t.date.toISOString(),
+                type: t.type,
+            })),
+        });
+        isFraudulent = fraudDetectionResponse.data.is_fraudulent;
+        // Logging the result from the API
+        console.log(`<-- Fraud Detection Result: ${isFraudulent === 1 ? 'FRAUDULENT' : 'Not Fraudulent'}`);
+      } catch (error) {
+        console.error('Fraud detection API error:', error.message);
+      }
+    }
+
 
     const payload = {
       initialBalance: user.initialBalance,
@@ -57,11 +79,13 @@ exports.createTransaction = async (req,res,next)=>{
       }))
     };
 
-    axios.post(ML_API_URL, payload).catch(err => {
-      console.error('ML API error:', err.message);
-    });
+    if (ML_API_URL) {
+        axios.post(ML_API_URL, payload).catch(err => {
+          console.error('ML API error:', err.message);
+        });
+    }
 
-    res.json({ txn });
+    res.json({ txn, is_fraudulent: isFraudulent });
   } catch(e){ next(e); }
 };
 

@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { getCategories, createCategory } from '../api/category';
 import { createTransaction } from '../api/transaction';
 import { useAuthStore } from '../store/authStore';
+import { detectFraud, getTransactions as getAllTransactions } from '../api';
 
 Modal.setAppElement('#root');
 
@@ -35,15 +36,15 @@ export default function CreateTransactionModal({ isOpen, onRequestClose, onSucce
   };
 
   const submit = async ()=>{
-    await createTransaction({ amount:parseFloat(amount), description:desc, categoryName:selCat, type }, accessToken);
+    const res = await createTransaction({ amount:parseFloat(amount), description:desc, categoryName:selCat, type }, accessToken);
     onRequestClose();
     await refreshUser();
-    onSuccess();
+    onSuccess(res.data.is_fraudulent);
   };
 
   return (
     <Modal isOpen={isOpen} className="p-4 bg-[#07122c] text-white max-w-md mx-auto mt-20 rounded-lg shadow-lg" overlayClassName="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center">
-      <h2 className="text-xl mb-4"> 
+      <h2 className="text-xl mb-4">
         {type === "income" ? "Add Income" : "Add Expense"}
       </h2>
       <div className="space-y-2">
@@ -61,7 +62,7 @@ export default function CreateTransactionModal({ isOpen, onRequestClose, onSucce
           ) : (
             <div className="flex space-x-2">
               <input type="text" placeholder="New Category" value={newCat}
-                    onChange={e=>setNewCat(e.target.value)} className="flex-1 border p-2"/>
+                     onChange={e=>setNewCat(e.target.value)} className="flex-1 border p-2"/>
               <button onClick={addCategory} className="bg-green-500 rounded-md text-white p-2">Add</button>
             </div>
           )}
