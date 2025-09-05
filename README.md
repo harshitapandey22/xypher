@@ -1,8 +1,8 @@
-# 💸 Call2Code
+# 💸 CapitaClarity
 
 ## 🤖 Because Sometimes Your Wallet Needs the Truth. — Now with Voice, Story, and Accessibility
 
-**Call2Code** is the ultimate Gen Z fintech playground:  
+**CapitaClarity** is the ultimate Gen Z fintech playground:  
 A sleek, interactive **expense tracker**, **AI‑powered forecasting engine**, **automated goal allocator**, and **on‑demand chatbot advisor**—now enhanced with powerful accessibility and storytelling features for hackathons and real-world impact.
 
 ---
